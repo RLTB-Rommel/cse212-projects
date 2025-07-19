@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 public class TakingTurnsQueueTests
 {
     [TestMethod]
-    // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3) and
-    // run until the queue is empty
+    // Scenario: Create a queue with Bob (2 turns), Tim (5), Sue (3); run until queue is empty.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: None – all outputs matched expected order after fix.
+    // Test Result: Passed. Queue behaved as expected after fixing GetNextPerson logic.
     public void TestTakingTurnsQueue_FiniteRepetition()
     {
         var bob = new Person("Bob", 2);
@@ -40,10 +40,10 @@ public class TakingTurnsQueueTests
     }
 
     [TestMethod]
-    // Scenario: Create a queue with the following people and turns: Bob (2), Tim (5), Sue (3)
-    // After running 5 times, add George with 3 turns.  Run until the queue is empty.
+    // Scenario: Queue starts with Bob (2), Tim (5), Sue (3); after 5 turns, George (3) is added.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, George, Sue, Tim, George, Tim, George
-    // Defect(s) Found: 
+    // Defect(s) Found: None – queue handled new person mid-turn as expected.
+    // Test Result: Passed. George entered the queue in correct turn and order.
     public void TestTakingTurnsQueue_AddPlayerMidway()
     {
         var bob = new Person("Bob", 2);
@@ -82,10 +82,10 @@ public class TakingTurnsQueueTests
     }
 
     [TestMethod]
-    // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
-    // Run 10 times.
+    // Scenario: Tim has 0 turns (infinite), Bob (2), Sue (3); run 10 turns.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Originally infinite turns were not preserved; fixed.
+    // Test Result: Passed. Infinite-turn logic works correctly for 0 value.
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -113,10 +113,10 @@ public class TakingTurnsQueueTests
     }
 
     [TestMethod]
-    // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
-    // Run 10 times.
+    // Scenario: Tim has -3 turns (infinite), Sue has 3; run 10 turns.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: None – negative turns correctly treated as infinite.
+    // Test Result: Passed. Infinite-turn behavior works with negative values.
     public void TestTakingTurnsQueue_ForeverNegative()
     {
         var timTurns = -3;
@@ -141,9 +141,10 @@ public class TakingTurnsQueueTests
     }
 
     [TestMethod]
-    // Scenario: Try to get the next person from an empty queue
-    // Expected Result: Exception should be thrown with appropriate error message.
-    // Defect(s) Found: 
+    // Scenario: GetNextPerson is called on an empty queue.
+    // Expected Result: Should throw InvalidOperationException with proper message.
+    // Defect(s) Found: None – correct exception was thrown and caught.
+    // Test Result: Passed. Exception handling for empty queue works as expected.
     public void TestTakingTurnsQueue_Empty()
     {
         var players = new TakingTurnsQueue();
