@@ -31,7 +31,8 @@
 /// I now ran dotnet test and all IsAnagram_*test passed
 /// 
 /// I just finished making the Maze.cs (another file). I will now be working for a possible additional credit by working on the Earthquake JSON data problem
-/// 
+/// I ran the dotnet test and obtained this output: Passed!  - Failed:     0, Passed:    15, Skipped:     0, Total:    15, Duration: 20 s - code.dll (net8.0)
+/// this means that all 15 tests passed successfully
 
 
 using System.Text.Json; //originally included in the provided cs file which provide the JSON serialization and deserialization tools
