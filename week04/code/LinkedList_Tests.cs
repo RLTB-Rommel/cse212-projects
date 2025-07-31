@@ -8,12 +8,12 @@ public class InsertTailTests
     [TestMethod]
     public void InsertTail_Empty()
     {
-        var ll = new LinkedList();
+        var ll = new LinkedList();// this creates a new empty linked list
 
-        Assert.IsTrue(ll.HeadAndTailAreNull());
-        ll.InsertTail(1);
-        Assert.IsTrue(ll.HeadAndTailAreNotNull());
-        Assert.AreEqual("<LinkedList>{1}", ll.ToString());
+        Assert.IsTrue(ll.HeadAndTailAreNull());// this determines the list is empty
+        ll.InsertTail(1); // this will insert a value (1) at the tail of the empty list
+        Assert.IsTrue(ll.HeadAndTailAreNotNull()); // this now assert the hed and tail are no longer null or the list now has one node
+        Assert.AreEqual("<LinkedList>{1}", ll.ToString());// this assert that the string representation of the list is correct,by containing just one element {1}
     }
 
     [TestMethod]
@@ -29,12 +29,12 @@ public class InsertTailTests
         ll.InsertHead(4);
         ll.InsertHead(5);
 
-        Assert.AreEqual("<LinkedList>{5, 4, 3, 2, 2, 2, 1}", ll.ToString());
+        Assert.AreEqual("<LinkedList>{5, 4, 3, 2, 2, 2, 1}", ll.ToString()); //current
 
         ll.InsertTail(0);
         ll.InsertTail(-1);
 
-        Assert.AreEqual("<LinkedList>{5, 4, 3, 2, 2, 2, 1, 0, -1}", ll.ToString());
+        Assert.AreEqual("<LinkedList>{5, 4, 3, 2, 2, 2, 1, 0, -1}", ll.ToString());//expected
     }
 }
 
@@ -46,9 +46,9 @@ public class RemoveTailTests
     {
         var ll = new LinkedList();
 
-        ll.RemoveTail();
-        Assert.IsTrue(ll.HeadAndTailAreNull());
-        Assert.AreEqual("<LinkedList>{}", ll.ToString());
+        ll.RemoveTail(); // list:{1} // this is to remove the only node making the set empty
+        Assert.IsTrue(ll.HeadAndTailAreNull()); // this is to check that both head and tail are null
+        Assert.AreEqual("<LinkedList>{}", ll.ToString()); //check string is empty
     }
 
     [TestMethod]
