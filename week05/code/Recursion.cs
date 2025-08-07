@@ -120,10 +120,12 @@
     Passed SolveMaze_Small [17 ms]
     Passed SolveMaze_Large [3 ms]
 
+    Test Run Successful. 
     Total tests: 14
-    Passed: 14
+        Passed: 14
+     Total time: 4.1917 Seconds
 */
-///with that final test I have completed the task.
+///with that final test I have completed the tasks.
 using System.Collections;
 
 public static class Recursion // calculates the sum of squares from 1 to n recursively
