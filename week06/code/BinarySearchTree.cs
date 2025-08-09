@@ -1,3 +1,23 @@
+///Problem 3: 
+/// In this problem I am asked to collect BST values from largest down to the smallest.
+/// My approach would be: 
+/// 1. Do a reverse in order traversal: right -> node -> left
+///     - if node is null , there is nothing to add (base case).
+///     - recurse into right subtree (larger values first).
+///     - add current node's data.
+///     - recurse into left subtree(smaller values last).
+/// 
+/// I ran the : dotnet test --filter "ClassName=TreeReverseTests" -v n and it returned:
+/*  A total of 1 test files matched the specified pattern.
+    Passed TreeReverse_Basic [10 ms]
+
+    Test Run Successful.
+    Total tests: 1
+        Passed: 1
+    Total time: 3.9228 Seconds
+ */
+
+
 using System.Collections;
 
 public class BinarySearchTree : IEnumerable<int>
@@ -81,6 +101,10 @@ public class BinarySearchTree : IEnumerable<int>
     private void TraverseBackward(Node? node, List<int> values)
     {
         // TODO Problem 3
+        if (node is null) return; //base case
+        TraverseBackward(node.Right, values); //visit larger values first
+        values.Add(node.Data); //then add current node value
+        TraverseBackward(node.Left, values);//finally visit smaller values
     }
 
     /// <summary>

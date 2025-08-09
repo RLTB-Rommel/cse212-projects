@@ -1,3 +1,30 @@
+/// For Problem 5: The task is create tree from sorted list (balanced build)
+/// My approach will be:
+/// 1. Base case: if first>last -> empty range means it need to stop.
+/// 2. Compute mid = (first + last)/2.
+/// 3. Insert sortedNumbers[mid]into BST.
+/// 4. Recurse left range: [first, mid -1].
+/// 5. Recurse right range: [mid + 1,last].
+/// I will be using indeces so there will be no subslicing since we do not create sublist.
+/// 
+/// I ran the : dotnet test --filter "ClassName=CreateTreeFromSortedListTests" -v n and it returned:
+/*  A total of 1 test files matched the specified pattern.
+    Passed CreateTreeFromSortedList_CountBy10s [7 ms]
+    Passed CreateTreeFromSortedList_127Nodes [5 ms]
+    Passed CreateTreeFromSortedList_128Nodes [< 1 ms]
+    Passed CreateTreeFromSortedList_Single [< 1 ms]
+    Passed CreateTreeFromSortedList_Empty [< 1 ms]
+
+    Test Run Successful.
+    Total tests: 5
+     Passed: 5
+    Total time: 3.3107 Seconds
+ */ 
+
+
+using System;
+using System.Collections.Generic;
+
 public static class Trees
 {
     /// <summary>
@@ -49,5 +76,34 @@ public static class Trees
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst)
     {
         // TODO Start Problem 5
+        if (first > last) // base case: no items in this range
+            return;
+
+        int mid = (first + last) / 2; //pick the middle index
+        bst.Insert(sortedNumbers[mid]); // insert the middle value first
+
+        //recursively insert left and right subranges
+        InsertMiddle(sortedNumbers, first, mid - 1, bst); //build left half
+        InsertMiddle(sortedNumbers, mid + 1, last, bst); //build right half
+
     }
 }
+
+/// with this final task
+/// I ran the full test : dotnet test -v n and it returned:
+/*  A total of 1 test files matched the specified pattern.
+    Passed TreeInsert_Basic [10 ms]
+    Passed TreeContains_Basic [< 1 ms]
+    Passed TreeReverse_Basic [2 ms]
+    Passed TreeGetHeight_Basic [1 ms]
+    Passed CreateTreeFromSortedList_CountBy10s [< 1 ms]
+    Passed CreateTreeFromSortedList_127Nodes [9 ms]
+    Passed CreateTreeFromSortedList_128Nodes [< 1 ms]
+    Passed CreateTreeFromSortedList_Single [< 1 ms]
+    Passed CreateTreeFromSortedList_Empty [< 1 ms]
+
+    Test Run Successful.
+    Total tests: 9
+     Passed: 9
+    Total time: 3.4595 Seconds
+ */ 
